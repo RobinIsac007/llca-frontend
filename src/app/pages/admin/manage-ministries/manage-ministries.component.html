@@ -1,0 +1,94 @@
+<div class="p-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">Manage Ministries</h1>
+    </div>
+
+    <!-- Add Button -->
+    <div class="mb-6">
+        <button *ngIf="!showForm" (click)="showAddForm()"
+            class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">
+            Add New Ministry
+        </button>
+    </div>
+
+    <!-- Form -->
+    <div *ngIf="showForm" class="bg-white shadow rounded-lg p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4">{{ isEditing ? 'Edit Ministry' : 'Add Ministry' }}</h2>
+        <form (ngSubmit)="saveMinistry()" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Name</label>
+                <input [(ngModel)]="currentMinistry.name" name="name"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea [(ngModel)]="currentMinistry.description" name="description"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3"></textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Leader</label>
+                <input [(ngModel)]="currentMinistry.leader" name="leader"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Meeting Time</label>
+                <input [(ngModel)]="currentMinistry.meetingTime" name="meetingTime"
+                    class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+            </div>
+
+            <!-- Photo Upload -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Ministry Photo</label>
+                <div class="mt-1 flex items-center space-x-4">
+                    <div *ngIf="photoPreview"
+                        class="relative w-24 h-24 rounded-lg overflow-hidden border border-gray-300">
+                        <img [src]="photoPreview" class="w-full h-full object-cover">
+                        <button type="button" (click)="photoPreview = null; selectedFile = null"
+                            class="absolute top-0 right-0 bg-red-500 text-white rounded-bl-lg p-1 hover:bg-red-600 transition">
+                            <span class="material-icons text-xs">close</span>
+                        </button>
+                    </div>
+                    <input type="file" (change)="onFileSelected($event)" accept="image/*"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-2">
+                <button type="button" (click)="cancelForm()" class="px-4 py-2 border rounded-md">Cancel</button>
+                <button type="submit" [disabled]="isLoading" class="px-4 py-2 bg-indigo-600 text-white rounded-md">
+                    {{ isLoading ? 'Saving...' : 'Save' }}
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Leader
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Meeting
+                        Time</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let ministry of ministries">
+                    <td class="px-6 py-4 whitespace-nowrap">{{ ministry.name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ ministry.leader }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ ministry.meetingTime }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button (click)="editMinistry(ministry)"
+                            class="text-indigo-600 hover:text-indigo-900 mr-2">Edit</button>
+                        <button (click)="deleteMinistry(ministry.id)"
+                            class="text-red-600 hover:text-red-900">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

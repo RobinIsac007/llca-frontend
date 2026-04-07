@@ -1,0 +1,5 @@
+/* Custom Royal Blue if not in Tailwind config yet, otherwise use bg-blue-900 or strict hex */
+.bg-royal-blue {
+    background-color: #0f1c4d;
+    /* Adjust this to match your exact RoyalBlueDark helper */
+}

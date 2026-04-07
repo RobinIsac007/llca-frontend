@@ -1,0 +1,75 @@
+<div class="bg-white min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Media Gallery</h2>
+            <p class="mt-4 text-lg text-gray-500">Sermons, photos, and videos from our community.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mt-8 flex justify-center">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button (click)="setActiveTab('sermons')" [class.border-indigo-500]="activeTab === 'sermons'"
+                        [class.text-indigo-600]="activeTab === 'sermons'"
+                        [class.border-transparent]="activeTab !== 'sermons'"
+                        [class.text-gray-500]="activeTab !== 'sermons'"
+                        class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm hover:text-gray-700 hover:border-gray-300">
+                        Sermons
+                    </button>
+                    <button (click)="setActiveTab('photos')" [class.border-indigo-500]="activeTab === 'photos'"
+                        [class.text-indigo-600]="activeTab === 'photos'"
+                        [class.border-transparent]="activeTab !== 'photos'"
+                        [class.text-gray-500]="activeTab !== 'photos'"
+                        class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm hover:text-gray-700 hover:border-gray-300">
+                        Photos
+                    </button>
+                    <button (click)="setActiveTab('videos')" [class.border-indigo-500]="activeTab === 'videos'"
+                        [class.text-indigo-600]="activeTab === 'videos'"
+                        [class.border-transparent]="activeTab !== 'videos'"
+                        [class.text-gray-500]="activeTab !== 'videos'"
+                        class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm hover:text-gray-700 hover:border-gray-300">
+                        Videos
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="mt-12">
+            <!-- Sermons -->
+            <div *ngIf="activeTab === 'sermons'" class="grid gap-6 lg:grid-cols-3">
+                <div *ngFor="let sermon of sermons"
+                    class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="text-lg font-medium text-gray-900">{{ sermon.title }}</h3>
+                    <p class="text-sm text-gray-500 mt-1">{{ sermon.preacher }} • {{ sermon.date }}</p>
+                    <div class="mt-4 flex space-x-3">
+                        <button class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Listen Audio</button>
+                        <button class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Watch Video</button>
+                        <button class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photos -->
+            <div *ngIf="activeTab === 'photos'" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div *ngFor="let photo of photos" class="relative group">
+                    <img [src]="photo.url" class="w-full h-64 object-cover rounded-lg" [alt]="photo.caption">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity rounded-lg flex items-center justify-center">
+                        <p class="text-white opacity-0 group-hover:opacity-100 font-medium">{{ photo.caption }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Videos -->
+            <div *ngIf="activeTab === 'videos'" class="grid gap-6 lg:grid-cols-2">
+                <div *ngFor="let video of videos" class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
+                    <!-- Placeholder for video embed -->
+                    <div class="flex items-center justify-center h-64 bg-gray-800 text-white">
+                        <p>{{ video.title }} (Video Embed Placeholder)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

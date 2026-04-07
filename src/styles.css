@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply Raleway font globally */
+html,
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Royal Blue Theme Colors */
+:root {
+    --royal-blue: #4169E1;
+    --royal-blue-dark: #1E3A8A;
+    --royal-blue-light: #60A5FA;
+}
+
+/* Custom Animations */
+@layer utilities {
+
+    /* Fade In */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in;
+    }
+
+    .animate-fade-in-delay-1 {
+        animation: fadeIn 1s ease-in 0.3s both;
+    }
+
+    .animate-fade-in-delay-2 {
+        animation: fadeIn 1s ease-in 0.6s both;
+    }
+
+    .animate-fade-in-delay-3 {
+        animation: fadeIn 1s ease-in 0.9s both;
+    }
+
+    /* Slide Up */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-slide-up {
+        animation: slideUp 0.8s ease-out;
+    }
+
+    /* Slide In Left */
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .animate-slide-in-left {
+        animation: slideInLeft 1s ease-out;
+    }
+
+    /* Slide In Right */
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .animate-slide-in-right {
+        animation: slideInRight 1s ease-out;
+    }
+
+    /* Scale In */
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .animate-scale-in {
+        animation: scaleIn 0.6s ease-out;
+    }
+
+    /* Hover Effects */
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Pulse Animation for Stats */
+    @keyframes pulseSlow {
+
+        0%,
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+    }
+
+    .animate-pulse-slow {
+        animation: pulseSlow 3s ease-in-out infinite;
+    }
+
+    /* Bounce Slow */
+    @keyframes bounceSlow {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .animate-bounce-slow {
+        animation: bounceSlow 2s ease-in-out infinite;
+    }
+}

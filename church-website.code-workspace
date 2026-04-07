@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../church-backend-api"
+		},
+		{
+			"path": "../church-admin-android"
+		}
+	],
+	"settings": {}
+}
